@@ -33,6 +33,7 @@ module.exports = class BiryaniOrder extends Order {
     switch (this.stateCur) {
       case OrderState.WELCOMING:
         aReturn.push("Welcome to Arthi's Resturant.");
+        aReturn.push("Select items for your combo.");
         aReturn.push("What Biryani size would you like? Please select large, medium or small!");
         this.sItem = "Biryani";
         this.stateCur = OrderState.SIZE;
@@ -52,7 +53,6 @@ module.exports = class BiryaniOrder extends Order {
         }
         break;
 
-      //new
       case OrderState.TYPE:
         if ((sInput.toLowerCase() == "chicken")
           || (sInput.toLowerCase() == "egg")
@@ -120,13 +120,13 @@ module.exports = class BiryaniOrder extends Order {
 
       case OrderState.DRINKS:
         if (sInput.toLowerCase() == "no") {
-          // aReturn.push("Thank-you for your order of");
-          // aReturn.push(`${this.sSize} ${this.sType} ${this.sItem}`);
-          // aReturn.push(`Total amount to be paid is $${this.nPrice}`);
-          // aReturn.push(`Please pay for your order here`);
-          //   aReturn.push(`${this.sUrl}/payment/${this.sNumber}/`);
-            //this.stateCur = OrderState.PAYMENT;
-            this.stateCur = OrderState.RECEIPT;
+          aReturn.push("Thank-you for your order of");
+          aReturn.push(`${this.sSize} ${this.sType} ${this.sItem}`);
+          aReturn.push(`Total amount to be paid is $${this.nPrice}`);
+          aReturn.push(`Please pay for your order here`);
+            aReturn.push(`${this.sUrl}/payment/${this.sNumber}/`);
+            this.stateCur = OrderState.PAYMENT;
+           // this.stateCur = OrderState.RECEIPT;
           
           if (this.sTopping.toLowerCase() == "vanilla" || this.sTopping.toLowerCase() == "chocolate") {
             aReturn.push(`and ${this.sTopping} icecream`);
@@ -196,9 +196,9 @@ module.exports = class BiryaniOrder extends Order {
       this.sItem = sTitle;
     }
     if (sAmount != "-1") {
-      this.nOrder = sAmount;
+      this.nPrice = sAmount;
     }
-    const sClientID = process.env.SB_CLIENT_ID || `ATPUSD5vhcoCdajODRXEIdE1loglgMaLQzlWo7JwnJF0_vfH4jj8IK_dZs3wdPW_pOponPif049SFUgG`
+    const sClientID = process.env.SB_CLIENT_ID || `CLIENT_ID to go here`
     return (`
       <!DOCTYPE html>
   
